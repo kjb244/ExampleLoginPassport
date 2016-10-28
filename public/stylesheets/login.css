@@ -1,0 +1,115 @@
+
+
+.login-box h4{
+  text-align: center;
+}
+
+.help-block{
+  margin-top: -5px;
+  margin-bottom: 15px;
+  color: red;
+}
+
+
+.ng-invalid .help-block i{
+  margin-right: 5px;
+}
+
+.button{
+  margin-bottom: 8px;
+}
+
+@media only screen and (max-width: 40em) { 
+
+  .login-box{
+    margin-top: 20px;
+  }
+  .fa-user, .fa-key{
+    display: none;
+  }
+
+  h4{
+    font-size: 140%;
+  }
+
+  .button{
+    width: 100%;
+  }
+
+
+
+  .fa-lock{
+    margin-right: 10px;
+  }
+
+
+}
+
+
+@media only screen and (min-width: 40.063em) { 
+
+
+
+  .login-box{
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .login-box >div{
+    padding: 20px;
+    border: 1px solid gray;
+    box-shadow: 10px 10px 5px #888888;
+    
+
+  }
+
+
+
+  .fa-lock{
+    margin-right: 20px;
+  }
+
+
+  .fa-user, .fa-key{
+   float: left;
+    width: 10%;
+      
+  }
+
+  .input-wrapper{
+    width: 90%;
+  }
+
+  .button{
+    width: 90%;
+    float: right;
+  }
+
+  footer{
+    margin-left: 10%;
+    float: left;
+  }
+
+  footer .message{
+    color: red;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .input-wrapper{
+    float:left;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+
+
+<div class="login-box row collapse" ng-app = 'myApp' ng-controller='mainCtrl'>
+	<div class="small-12 medium-9 large-7 columns small-centered">
+		<div class="row">
+	    	<div class="small-12 medium-10 large-9 columns small-centered">
+		    	<form method="post" action="/login" name="loginForm" ng-submit="submitForm(loginForm.$valid)" novalidate>
+		         	<h4><i class="fa fa-lock" aria-hidden="true"></i>Node Login</h4>
+		        
+			        <div class="username">
+			          <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+			          <div class="input-wrapper">
+			              <input type="text" placeholder="email" ng-init="focusEmail=true" name="email" ng-model="email" ng-pattern="emailRegex" ng-focus="focusEmail=true" ng-blur="focusEmail=false;testfunction();"  required>
+			              <p ng-show="(loginForm.email.$error.pattern && !focusEmail) || (!focusEmail && (email === undefined || email == ''))" class="help-block">
+			              	<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Email is required</p>
+			          </div>
+			        </div>
+		        
+			        <div class="password">
+			          <i class="fa fa-key fa-2x" aria-hidden="true"></i>
+			          <div class="input-wrapper">
+			              <input type="password" placeholder="password" ng-init="focusPassword=true" name="password" ng-model="password" ng-minlength="4" ng-focus="focusPassword=true" ng-blur="focusPassword=false" required>
+			              <p ng-show="loginForm.password.$invalid && !focusPassword " class="help-block">
+			              	<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Password doesn't meet minumum requirements</p>
+			          </div>
+			        </div>
+			      
+		  
+			        <div class="submit">
+			        	<button class="button" ng-disabled="loginForm.$invalid">Submit</button>
+			        </div>
+
+			        <footer>
+			        	{{#with loginMessage}}
+			        		<p class="message">{{this}}</p>
+			        	{{/with}}
+			        	<a href="/signup">Signup</a>
+			        </footer>
+
+		 		</form>
+	      	</div>
+      	</div>
+    </div>  
+</div>
+<script src="/javascripts/login.js"></script>
