@@ -118,9 +118,13 @@ module.exports = function(passport) {
 
             // if the user is found but the password is wrong
             else if (!user.validPassword(password)){
+                let msg = 'Username/password invalid';
                 user.local.loginattempts.push( { successful: false, time: new Date() } );
                 user.save();
-                return done(null, false, req.flash('loginMessage', 'Username/password invalid')); // create the loginMessage and save it to session as flashdata
+                if (user.badXLogins(4)){
+                    msg = "User account locked after unsuccessful logins";
+                }
+                return done(null, false, req.flash('loginMessage', msg)); // create the loginMessage and save it to session as flashdata
             }
 
             // all is well, store in db and return successful user

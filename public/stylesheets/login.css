@@ -22,7 +22,7 @@
 @media only screen and (max-width: 40em) { 
 
   .login-box{
-    margin-top: 20px;
+    padding-top: 20px;
   }
   .fa-user, .fa-key{
     display: none;

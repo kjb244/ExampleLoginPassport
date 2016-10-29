@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
@@ -21,6 +23,16 @@ userSchema.methods.generateHash = function(password) {
 // checking if password is valid
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
+};
+
+userSchema.methods.badXLogins = function(numBadLogins, minThreshold) {
+	let loginArr = this.local.loginattempts;
+	numBadLogins = numBadLogins || 3;
+	minThreshold = minThreshold || 10 * 60 * 1000;
+	let dt = new Date();
+	let backXMin = new Date (dt.getTime() - minThreshold);
+	let holderArr = loginArr.filter(login => login.successful == false && login.time.getTime() > backXMin);
+	return holderArr.length >= numBadLogins ? true: false;
 };
 
 // create the model for users and expose it to our app
