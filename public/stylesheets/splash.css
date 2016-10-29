@@ -1,0 +1,49 @@
+.top-bar{
+	overflow: hidden;
+}
+
+.settings i{
+	margin-right: 8px;
+}
+
+.dropdown a:hover{
+	text-decoration: underline;
+}
+
+.row{
+	max-width: 400rem;
+}
+
+#chart-container-1, #chart-container-2{
+	height: 500px;
+}
+
+.engagement .background{
+	height: 400px;
+ 	background: linear-gradient(to right, yellow, orange, red, orange, yellow); 
+}
+
+.engagement .background >.row{
+	height: 100%;
+}
+
+.engagement .content{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+
+}
+
+.engagement .content h3, .engagement .content p{
+	text-align: center;
+	color: white;
+}
+
+i.fa{
+	display: inline-block;
+    text-align: center;
+    width: 100%;
+   
+    line-height: 500px;
+}

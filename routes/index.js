@@ -50,6 +50,36 @@ module.exports = function(app, passport) {
         failureFlash : true // allow flash messages
     }));
 
+    app.get('/chartdata1', function(req, res){
+        setTimeout(()=>{
+            let years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010];
+            let obj = years.reduce(function(o,v,i,arr){
+                o[arr[i]] = Math.floor((Math.random() * 10000) + 1);
+                return o;
+            },{});
+
+
+            res.json(obj);
+
+        }, 1000);
+
+    });
+
+    app.get('/chartdata2', function(req, res){
+        setTimeout(()=>{
+            let years = [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999];
+            let obj = years.reduce(function(o,v,i,arr){
+                o[arr[i]] = Math.floor((Math.random() * 10000) + 1);
+                return o;
+            },{});
+
+
+            res.json(obj);
+
+        }, 1500);
+
+    });
+
 
 };
 
