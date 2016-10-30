@@ -9,6 +9,7 @@ var userSchema = mongoose.Schema({
 		password: String,
 		datecreated: { type: Date },
 		lastlogin: { type: Date },
+		lockedout: Boolean,
 		loginattempts: [ { successful: Boolean, time: Date} ]
 
 	}
@@ -25,12 +26,12 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
-userSchema.methods.badXLogins = function(numBadLogins, minThreshold) {
+userSchema.methods.badXLogins = function(numBadLogins, secThreshold) {
 	let loginArr = this.local.loginattempts;
 	numBadLogins = numBadLogins || 3;
-	minThreshold = minThreshold || 10 * 60 * 1000;
+	secThreshold = secThreshold * 1000 || 10 * 60 * 1000;
 	let dt = new Date();
-	let backXMin = new Date (dt.getTime() - minThreshold);
+	let backXMin = new Date (dt.getTime() - secThreshold);
 	let holderArr = loginArr.filter(login => login.successful == false && login.time.getTime() > backXMin);
 	return holderArr.length >= numBadLogins ? true: false;
 };

@@ -6,8 +6,15 @@ var LocalStrategy   = require('passport-local').Strategy;
 // load up the user model
 var User            = require('../app/models/user');
 
+var utilities = require('../routes/utilities.js');
+
+
+
+
 // expose this function to our app using module.exports
 module.exports = function(passport) {
+
+
 
     // =========================================================================
     // passport session setup ==================================================
@@ -46,7 +53,6 @@ module.exports = function(passport) {
         process.nextTick(function() {
 
         
-        console.log(email, password);
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
@@ -103,40 +109,62 @@ module.exports = function(passport) {
     },
     function(req, email, password, done) { // callback with email and password from our form
 
-        // find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email' :  email }, function(err, user) {
-            // if there are any errors, return the error before anything else
-            if (err){
-                return done(err);
-            }
-
-            // if no user is found, return the message
-            else if (!user) {
-                return done(null, false, req.flash('loginMessage', "Username/password invalid")); // req.flash is the way to set flashdata using connect-flash
-            }
-
-            // if the user is found but the password is wrong
-            else if (!user.validPassword(password)){
-                let msg = 'Username/password invalid';
-                user.local.loginattempts.push( { successful: false, time: new Date() } );
-                user.save();
-                if (user.badXLogins(4)){
-                    msg = "User account locked after unsuccessful logins";
+        //get parm utils from db
+        utilities.getParmValueObj().then(function(data){
+            let maxLoginAttempts = data.securityprincipal.lockout.maxloginattempts;
+            let secondThreshold = data.securityprincipal.lockout.secondthreshold;
+        
+            // find a user whose email is the same as the forms email
+            // we are checking to see if the user trying to login already exists
+            User.findOne({ 'local.email' :  email }, function(err, user) {
+                // if there are any errors, return the error before anything else
+                if (err){
+                    return done(err);
                 }
-                return done(null, false, req.flash('loginMessage', msg)); // create the loginMessage and save it to session as flashdata
-            }
 
-            // all is well, store in db and return successful user
-            else{
-                user.local.lastlogin = new Date();
-                user.local.loginattempts.push( { successful: true, time: new Date() } );
-                user.save();
+                // if no user is found, return the message
+                else if (!user) {
 
-            }
-            
+                    
+                    return done(null, false, req.flash('loginMessage', "Username/password invalid")); // req.flash is the way to set flashdata using connect-flash
+                }
 
-            return done(null, user);
+                else if (user.local.lockedout){
+                    user.local.loginattempts.push( { successful: false, time: new Date() } );
+                    user.save();
+                    return done(null, false, req.flash('loginMessage', "User account locked after unsuccessful logins")); 
+                }
+
+                // if the user is found but the password is wrong
+                else if (!user.validPassword(password)){
+
+                    let msg = 'Username/password invalid';
+                    user.local.loginattempts.push( { successful: false, time: new Date() } );
+                    
+                    if (user.badXLogins(maxLoginAttempts, secondThreshold)){
+                        msg = "User account locked after unsuccessful logins";
+                        user.local.lockedout = true;
+                    }
+                    user.save();
+                    return done(null, false, req.flash('loginMessage', msg)); // create the loginMessage and save it to session as flashdata
+                        
+              
+               
+                }
+
+                // all is well, store in db and return successful user
+                else{
+                    user.local.lastlogin = new Date();
+                    user.local.loginattempts.push( { successful: true, time: new Date() } );
+                    user.save();
+                    return done(null, user);
+
+                }
+                
+
+                
+            });
+
         });
 
     }));

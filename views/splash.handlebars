@@ -1,58 +1,60 @@
 <link href="/stylesheets/splash.css" rel="stylesheet"> 
-<nav class="top-bar" data-topbar role="navigation">
-  <ul class="title-area">
-    <li class="name">
-      <h1><a href="#">Node Test Site</a></h1>
-    </li>
-     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
+<section class="nav-bar sticky">
+	<nav class="top-bar" data-topbar role="navigation">
+	  <ul class="title-area">
+	    <li class="name">
+	      <h1><a href="#">Node Test Site</a></h1>
+	    </li>
+	     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
 
-  <section class="top-bar-section">
-    <!-- Left Nav Section -->
-    <ul class="left">
-    	<li class="has-dropdown">
-    		<a href="#">Section 1</a>
-    		<ul class="dropdown">
-    			<li>
-    				<a href="#">Drop down 1</a>
-    			</li>
-    			<li>
-    				<a href="#">Drop down 2</a>
-    			</li>
-    		</ul>
-    	</li>
-    	<li class="has-dropdown">
-    		<a href="#">Section 2</a>
-    		<ul class="dropdown">
-    			<li>
-    				<a href="#">Drop down 2</a>
-    			</li>
-    			<li>
-    				<a href="#">Drop down 3</a>
-    			</li>
-    		</ul>
-    	</li>
-      
-    </ul>
-    <!-- Right Nav Section -->
-    <ul class="right settings">
-      <li class="has-dropdown">
-        <a href="#">Settings</a>
-        <ul class="dropdown">
-          <li>
-          	<a href="#"><i class="fa fa-cog" aria-hidden="true"></i>Test Area 1</a>
-          </li>
-          <li>
-          	<a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+	  <section class="top-bar-section">
+	    <!-- Left Nav Section -->
+	    <ul class="left">
+	    	<li class="has-dropdown">
+	    		<a href="#">Section 1</a>
+	    		<ul class="dropdown">
+	    			<li>
+	    				<a href="#">Drop down 1</a>
+	    			</li>
+	    			<li>
+	    				<a href="#">Drop down 2</a>
+	    			</li>
+	    		</ul>
+	    	</li>
+	    	<li class="has-dropdown">
+	    		<a href="#">Section 2</a>
+	    		<ul class="dropdown">
+	    			<li>
+	    				<a href="#">Drop down 2</a>
+	    			</li>
+	    			<li>
+	    				<a href="#">Drop down 3</a>
+	    			</li>
+	    		</ul>
+	    	</li>
+	      
+	    </ul>
+	    <!-- Right Nav Section -->
+	    <ul class="right settings">
+	      <li class="has-dropdown">
+	        <a href="#">Settings</a>
+	        <ul class="dropdown">
+	          <li>
+	          	<a href="#"><i class="fa fa-cog" aria-hidden="true"></i>Test Area 1</a>
+	          </li>
+	          <li>
+	          	<a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+	          </li>
+	        </ul>
+	      </li>
+	    </ul>
 
 
-  </section>
-</nav>
+	  </section>
+	</nav>
+</section>
 <section class="main" ng-app = 'myApp' ng-controller='mainCtrl'>
 	<div class="row engagement">
 		<div class="small-12 columns background">

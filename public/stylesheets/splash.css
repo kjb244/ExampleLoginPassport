@@ -1,5 +1,5 @@
 .top-bar{
-	overflow: hidden;
+	
 }
 
 .settings i{
@@ -40,10 +40,20 @@
 	color: white;
 }
 
-i.fa{
+.engagement .content h3{
+	font-size: 65px;
+}
+
+.engagement .content p{
+	font-size: 24px;
+}
+
+[class*="chart"] i.fa{
+
 	display: inline-block;
     text-align: center;
     width: 100%;
    
     line-height: 500px;
+
 }
