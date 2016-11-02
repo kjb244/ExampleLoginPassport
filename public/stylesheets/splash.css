@@ -23,17 +23,6 @@
  	background: linear-gradient(to right, yellow, orange, red, orange, yellow); 
 }
 
-.engagement .background >.row{
-	height: 100%;
-}
-
-.engagement .content{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-
-}
 
 .engagement .content h3, .engagement .content p{
 	text-align: center;
@@ -53,7 +42,8 @@
 	display: inline-block;
     text-align: center;
     width: 100%;
+    margin-top: 40px;
    
-    line-height: 500px;
+    
 
 }
